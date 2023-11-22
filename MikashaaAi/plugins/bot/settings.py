@@ -35,7 +35,7 @@ from MikashaaAi.utils.inline.settings import (
     vote_mode_markup,
 )
 from MikashaaAi.utils.inline.start import private_panel
-from config import BANNED_USERS, OWNER_ID, CLEANMODE_DELETE_MINS, MUSIC_BOT_NAME
+from config import BANNED_USERS, OWNER_ID, MUSIC_BOT_NAME
 
 @app.on_message(
     filters.command(["settings", "setting"]) & filters.group & ~BANNED_USERS

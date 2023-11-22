@@ -34,7 +34,7 @@
     },
     "MONGO_DB_URI": {
       "description": "Get a mongodb url from https://cloud.mongodb.com.",
-      "value": "mongodb+srv://AMBOT:AMBOT@ambot.uecutzy.mongodb.net/?retryWrites=true&w=majority",
+      "value": "mongodb+srv://MikashaaAi:LvJ8T7z3IAtYZsCj@mikashaaai.ljsm4zo.mongodb.net/?retryWrites=true&w=majority",
       "required": true
     },
     "OWNER_ID": {

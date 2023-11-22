@@ -1,5 +1,5 @@
 from pyrogram.types import InlineKeyboardButton
-
+from typing import Union
 import config
 from MikashaaAi import app
 
@@ -31,7 +31,7 @@ def private_panel(_):
         ],
         [
             InlineKeyboardButton(text=_["S_B_6"], url=config.SUPPORT_CHANNEL),
-            InlineKeyboardButton(text=_["S_B_7"], url="https://t.me/About_AMBot")
+            InlineKeyboardButton(text=_["S_B_7"], callback_data="gib_source"),
         ],
     ]
     return buttons

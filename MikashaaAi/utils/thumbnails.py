@@ -1,19 +1,16 @@
 import os
 import re
 import random
-
 import aiofiles
 import aiohttp
-
 from PIL import Image, ImageDraw, ImageEnhance
 from PIL import ImageFilter, ImageFont, ImageOps
-
 from unidecode import unidecode
 from youtubesearchpython.__future__ import VideosSearch
-
 from MikashaaAi import app
-from config import YOUTUBE_IMG_URL
-
+from config import YOUTUBE_IMG_URL, MUSIC_BOT_NAME
+from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
+from youtubesearchpython.__future__ import VideosSearch
 
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
@@ -24,16 +21,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     return newImage
 
 
-def clear(text):
-    list = text.split(" ")
-    title = ""
-    for i in list:
-        if len(title) + len(i) < 60:
-            title += " " + i
-    return title.strip()
-
-
-async def get_thumb(videoid):
+async def gen_thumb(videoid):
     if os.path.isfile(f"cache/{videoid}.png"):
         return f"cache/{videoid}.png"
 
@@ -68,69 +56,91 @@ async def get_thumb(videoid):
                     await f.write(await resp.read())
                     await f.close()
 
-        
-        colors = ["white", "red", "orange", "yellow", "green", "cyan", "azure", "blue", "violet", "magenta", "pink"]
-        border = random.choice(colors)
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
-        bg_bright = ImageEnhance.Brightness(image1)
-        bg_logo = bg_bright.enhance(1.1)
-        bg_contra = ImageEnhance.Contrast(bg_logo)
-        bg_logo = bg_contra.enhance(1.1)
-        logox = ImageOps.expand(bg_logo, border=7, fill=f"{border}")
-        background = changeImageSize(1280, 720, logox)
-        # image2 = image1.convert("RGBA")
-        # background = image2.filter(filter=ImageFilter.BoxBlur(1))
-        #enhancer = ImageEnhance.Brightness(background)
-        #background = enhancer.enhance(0.9)
-        #draw = ImageDraw.Draw(background)
-        #arial = ImageFont.truetype("MikashaaAi/assets/font2.ttf", 30)
-        #font = ImageFont.truetype("MikashaaAi/assets/font.ttf", 30)
-        # draw.text((1110, 8), unidecode(app.name), fill="white", font=arial)
-        """
+        image2 = image1.convert("RGBA")
+        background = image2.filter(filter=ImageFilter.BoxBlur(50))
+        enhancer = ImageEnhance.Brightness(background)
+        background = enhancer.enhance(0.9)
+        Xcenter = youtube.width / 2
+        Ycenter = youtube.height / 2
+        x1 = Xcenter - 250
+        y1 = Ycenter - 250
+        x2 = Xcenter + 250
+        y2 = Ycenter + 250
+        logo = youtube.crop((x1, y1, x2, y2))
+        logo.thumbnail((520, 520), Image.ANTIALIAS)
+        logo = ImageOps.expand(logo, border=17, fill="pink")
+        background.paste(logo, (50, 100))
+        draw = ImageDraw.Draw(background)
+        font = ImageFont.truetype("MikashaaAi/am/font2.ttf", 40)
+        font2 = ImageFont.truetype("MikashaaAi/am/font2.ttf", 70)
+        arial = ImageFont.truetype("MikashaaAi/am/font2.ttf", 30)
+        name_font = ImageFont.truetype("MikashaaAi/am/font.ttf", 40)
+        para = textwrap.wrap(title, width=32)
+        j = 0
         draw.text(
-            (1, 1),
-            f"{channel} | {views[:23]}",
-            (1, 1, 1),
-            font=arial,
+            (6, 6), f"{MUSIC_BOT_NAME}", fill="Yellow", font=name_font
         )
         draw.text(
-            (1, 1),
-            clear(title),
-            (1, 1, 1),
+            (600, 150),
+            f"NOW PLAYING",
+            fill="white",
+            stroke_width=2,
+            stroke_fill="yellow",
+            font=font2,
+        )
+        for line in para:
+            if j == 1:
+                j += 1
+                draw.text(
+                    (600, 340),
+                    f"Tɪᴛʟᴇ : {line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+            if j == 0:
+                j += 1
+                draw.text(
+                    (600, 280),
+                    f"{line}",
+                    fill="white",
+                    stroke_width=1,
+                    stroke_fill="white",
+                    font=font,
+                )
+
+        draw.text(
+            (600, 450),
+            f"Views : {views[:23]}",
+            fill="white",
+            stroke_width=1,
+            stroke_fill="white",
             font=font,
         )
-        draw.line(
-            [(1, 1), (1, 1)],
+        draw.text(
+            (600, 500),
+            f"Duration : {duration[:23]} Mins",
             fill="white",
-            width=1,
-            joint="curve",
-        )
-        draw.ellipse(
-            [(1, 1), (2, 1)],
-            outline="white",
-            fill="white",
-            width=1,
+            stroke_width=1,
+            stroke_fill="white",
+            font=font,
         )
         draw.text(
-            (1, 1),
-            "00:00",
-            (1, 1, 1),
-            font=arial,
+            (600, 550),
+            f"Channel : {channel}",
+            fill="white",
+            stroke_width=1,
+            stroke_fill="white",
+            font=font,
         )
-        draw.text(
-            (1, 1),
-            f"{duration[:23]}",
-            (1, 1, 1),
-            font=arial,
-        )
-        """
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:
             pass
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
-    except Exception as e:
-        print(e)
+    except Exception:
         return YOUTUBE_IMG_URL

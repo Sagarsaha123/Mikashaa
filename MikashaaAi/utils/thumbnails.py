@@ -167,6 +167,14 @@ async def get_thumb(videoid):
             stroke_fill="white",
             font=font,
         )
+        draw.text(
+            (600, 600),
+            f"Added By : AMBOT",
+            fill="white",
+            stroke_width=1,
+            stroke_fill="green",
+            font=font,
+        )
         try:
             os.remove(f"cache/thumb{videoid}.png")
         except:

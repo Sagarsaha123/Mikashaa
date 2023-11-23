@@ -13,7 +13,7 @@ from MikashaaAi.utils.exceptions import AssistantErr
 from MikashaaAi.utils.inline import aq_markup, close_markup, stream_markup
 from MikashaaAi.utils.pastebin import DAXXBin
 from MikashaaAi.utils.stream.queue import put_queue, put_queue_index
-from MikashaaAi.utils.thumbnails import get_thumb
+from MikashaaAi.utils.thumbnails import gen_thumb
 
 
 async def stream(

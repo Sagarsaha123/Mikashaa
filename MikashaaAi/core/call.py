@@ -35,7 +35,7 @@ from MikashaaAi.utils.exceptions import AssistantErr
 from MikashaaAi.utils.formatters import check_duration, seconds_to_min, speed_converter
 from MikashaaAi.utils.inline.play import stream_markup
 from MikashaaAi.utils.stream.autoclear import auto_clean
-from MikashaaAi.utils.thumbnails import gen_thumb
+from MikashaaAi.utils.thumbnails import get_thumb
 from strings import get_string
 
 autoend = {}

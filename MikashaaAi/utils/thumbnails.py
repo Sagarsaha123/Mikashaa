@@ -111,7 +111,7 @@ async def get_thumb(videoid):
             fill="blue",
             stroke_width=1,
             stroke_fill="yellow",
-            font=font2,
+            font=name_font,
         )
         draw.text(
             (600, 200),

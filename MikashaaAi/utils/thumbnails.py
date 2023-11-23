@@ -5,10 +5,7 @@ import textwrap
 import aiofiles
 import aiohttp
 
-from PIL import Image, ImageDraw, ImageEnhance
-from PIL import ImageFilter, ImageFont, ImageOps
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
-from unidecode import unidecode
 from youtubesearchpython.__future__ import VideosSearch
 
 from MikashaaAi import app
@@ -25,11 +22,11 @@ def changeImageSize(maxWidth, maxHeight, image):
 
 
 def clear(text):
-    list = text.split(" ")
+    words = text.split(" ")
     title = ""
-    for i in list:
-        if len(title) + len(i) < 60:
-            title += " " + i
+    for word in words:
+        if len(title) + len(word) < 60:
+            title += " " + word
     return title.strip()
 
 
@@ -68,13 +65,21 @@ async def get_thumb(videoid):
                     await f.write(await resp.read())
                     await f.close()
 
-        
         youtube = Image.open(f"cache/thumb{videoid}.png")
         image1 = changeImageSize(1280, 720, youtube)
         image2 = image1.convert("RGBA")
-        background = image2.filter(filter=ImageFilter.BoxBlur(50))
-        enhancer = ImageEnhance.Brightness(background)
-        background = enhancer.enhance(0.9)
+        
+        # Check if the 'filter' attribute is available in the Image module
+        if hasattr(Image, 'filter'):
+            background = image2.filter(filter=ImageFilter.BoxBlur(50))
+            enhancer = ImageEnhance.Brightness(background)
+            background = enhancer.enhance(0.9)
+        else:
+            # If 'filter' attribute is not available, use a different approach for blurring
+            background = image2.filter(ImageFilter.BoxBlur(50))
+            enhancer = ImageEnhance.Brightness(background)
+            background = enhancer.enhance(0.9)
+        
         Xcenter = youtube.width / 2
         Ycenter = youtube.height / 2
         x1 = Xcenter - 250
@@ -90,13 +95,21 @@ async def get_thumb(videoid):
         font2 = ImageFont.truetype("assets/font2.ttf", 70)
         arial = ImageFont.truetype("assets/font2.ttf", 30)
         name_font = ImageFont.truetype("assets/font.ttf", 40)
-        para = textwrap.wrap(title, width=32)
+        para = textwrap.wrap(clear(title), width=32)  # Corrected title clearing
         j = 0
         draw.text(
-            (6, 6), f"Mikashaa Ai", fill="Yellow", font=name_font
+            (6, 6), f"Mikashaa Ai op", fill="Yellow", font=name_font
         )
         draw.text(
-            (600, 150),
+            (600, 100),
+            f"POWER OF MIKASHAA PLAYER",
+            fill="blue",
+            stroke_width=2,
+            stroke_fill="yellow",
+            font=font2,
+        )
+        draw.text(
+            (600, 200),
             f"NOW PLAYING",
             fill="white",
             stroke_width=2,
@@ -107,7 +120,7 @@ async def get_thumb(videoid):
             if j == 1:
                 j += 1
                 draw.text(
-                    (600, 340),
+                    (600, 390),
                     f"Tɪᴛʟᴇ : {line}",
                     fill="white",
                     stroke_width=1,
@@ -117,7 +130,7 @@ async def get_thumb(videoid):
             if j == 0:
                 j += 1
                 draw.text(
-                    (600, 280),
+                    (600, 330),
                     f"{line}",
                     fill="white",
                     stroke_width=1,
@@ -155,5 +168,6 @@ async def get_thumb(videoid):
             pass
         background.save(f"cache/{videoid}.png")
         return f"cache/{videoid}.png"
-    except Exception:
+    except Exception as e:
+        print(e)
         return YOUTUBE_IMG_URL

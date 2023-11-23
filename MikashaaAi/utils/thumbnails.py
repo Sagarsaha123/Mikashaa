@@ -1,16 +1,17 @@
+
+
+
 import os
 import re
-import random
+import textwrap
+
 import aiofiles
 import aiohttp
-from PIL import Image, ImageDraw, ImageEnhance
-from PIL import ImageFilter, ImageFont, ImageOps
-from unidecode import unidecode
-from youtubesearchpython.__future__ import VideosSearch
-from MikashaaAi import app
-from config import YOUTUBE_IMG_URL, MUSIC_BOT_NAME
 from PIL import Image, ImageDraw, ImageEnhance, ImageFilter, ImageFont, ImageOps
 from youtubesearchpython.__future__ import VideosSearch
+
+from config import MUSIC_BOT_NAME, YOUTUBE_IMG_URL
+
 
 def changeImageSize(maxWidth, maxHeight, image):
     widthRatio = maxWidth / image.size[0]
@@ -21,7 +22,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     return newImage
 
 
-async def get_thumb(videoid):
+async def gen_thumb(videoid):
     if os.path.isfile(f"cache/{videoid}.png"):
         return f"cache/{videoid}.png"
 
@@ -73,10 +74,10 @@ async def get_thumb(videoid):
         logo = ImageOps.expand(logo, border=17, fill="pink")
         background.paste(logo, (50, 100))
         draw = ImageDraw.Draw(background)
-        font = ImageFont.truetype("MikashaaAi/am/font2.ttf", 40)
-        font2 = ImageFont.truetype("MikashaaAi/am/font2.ttf", 70)
-        arial = ImageFont.truetype("MikashaaAi/am/font2.ttf", 30)
-        name_font = ImageFont.truetype("MikashaaAi/am/font.ttf", 40)
+        font = ImageFont.truetype("assets/font2.ttf", 40)
+        font2 = ImageFont.truetype("assets/font2.ttf", 70)
+        arial = ImageFont.truetype("assets/font2.ttf", 30)
+        name_font = ImageFont.truetype("assets/font.ttf", 40)
         para = textwrap.wrap(title, width=32)
         j = 0
         draw.text(

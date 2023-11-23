@@ -9,7 +9,7 @@ from MikashaaAi.utils.database import get_loop
 from MikashaaAi.utils.decorators import AdminRightsCheck
 from MikashaaAi.utils.inline import close_markup, stream_markup
 from MikashaaAi.utils.stream.autoclear import auto_clean
-from MikashaaAi.utils.thumbnails import gen_thumb
+from MikashaaAi.utils.thumbnails import get_thumb
 from config import BANNED_USERS
 
 

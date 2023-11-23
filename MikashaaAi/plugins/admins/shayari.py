@@ -5,7 +5,7 @@ from pyrogram import Client, filters
 from pyrogram.enums import ChatType, ChatMemberStatus
 from pyrogram.errors import UserNotParticipant
 from pyrogram.types import ChatPermissions
-from config import BOT_USERNAME
+from config import USERNAME as BOT_USERNAME
 import config 
 from config import *
 spam_chats = []

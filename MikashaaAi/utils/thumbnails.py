@@ -106,7 +106,7 @@ async def get_thumb(videoid):
             (6, 6), f"Mikashaa Ai", fill="Yellow", font=name_font
         )
         draw.text(
-            (600, 50),
+            (500, 6),
             f"POWER OF MIKASHAA PLAYER",
             fill="blue",
             stroke_width=1,

@@ -2,7 +2,7 @@ from typing import Union
 
 from pyrogram import filters, types
 from pyrogram.types import InlineKeyboardMarkup, Message
-
+from pyrogram.types import InlineKeyboardButton
 from MikashaaAi import app
 from MikashaaAi.utils import help_pannel
 from MikashaaAi.utils.database import get_lang
@@ -44,7 +44,13 @@ async def helper_private(
             reply_markup=keyboard,
         )
 
-
+def help_back_markup_2(_) -> List[List[InlineKeyboardButton]]:
+    # Define your left and right buttons
+    left_button = InlineKeyboardButton("<<", callback_data="help_back_left")
+    right_button = InlineKeyboardButton(">>", callback_data="help_back_right")
+    
+    keyboard = [[left_button, right_button]]
+    return keyboard
 @app.on_message(filters.command(["help"]) & filters.group & ~BANNED_USERS)
 @LanguageStart
 async def help_com_group(client, message: Message, _):
@@ -58,6 +64,12 @@ async def helper_cb(client, CallbackQuery, _):
     callback_data = CallbackQuery.data.strip()
     cb = callback_data.split(None, 1)[1]
     keyboard = help_back_markup(_)
+    if cb == "help_back_left":
+        pass
+    elif cb == "help_back_right":
+         pass
+    else:
+        keyboard = help_back_markup_2(_)
     if cb == "hb1":
         await CallbackQuery.edit_message_text(helpers.HELP_1, reply_markup=keyboard)
     elif cb == "hb2":

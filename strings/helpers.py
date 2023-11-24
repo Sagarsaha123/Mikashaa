@@ -247,3 +247,8 @@ Available commands:
 Example:
 /google pyrogram: return top 5 reuslts.
 """
+HELP_25 = """
+<b><u>𝘊ʜᴀᴛʙᴏᴛ :</b></u>
+Available commands:
+/chatbot on/off  
+"""

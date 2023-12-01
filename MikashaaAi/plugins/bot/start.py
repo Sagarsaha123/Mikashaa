@@ -17,6 +17,7 @@ from MikashaaAi.utils.database import (
     is_banned_user,
     is_on_off,
 )
+from MikashaaAi.utils import bot_sys_stats
 from MikashaaAi.utils.decorators.language import LanguageStart
 from MikashaaAi.utils.formatters import get_readable_time
 from MikashaaAi.utils.inline import help_pannel, private_panel, start_panel
@@ -93,9 +94,10 @@ async def start_pm(client, message: Message, _):
                 )
     else:
         out = private_panel(_)
+         UP, CPU, RAM, DISK = await bot_sys_stats()
         await message.reply_photo(
             random.choice(YUMI_PICS),
-            caption=_["start_2"].format(message.from_user.mention, app.mention),
+            caption=_["start_2"].format(message.from_user.mention, app.mention, UP, DISK, CPU, RAM),
             reply_markup=InlineKeyboardMarkup(out),
         )
         if await is_on_off(2):

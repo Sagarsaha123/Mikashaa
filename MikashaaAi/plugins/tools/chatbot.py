@@ -2,7 +2,6 @@ from pyrogram import filters
 from MikashaaAi import app
 from config import OWNER_ID
 from pyrogram.types import Message
-from pyrogram import Client, filters
 from pyrogram.types import ChatMember
 import asyncio
 import psutil

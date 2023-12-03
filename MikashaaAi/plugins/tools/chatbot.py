@@ -50,7 +50,7 @@ from pyrogram.types import *
 
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb+srv://kuldiprathod2003:kuldiprathod2003@cluster0.wxqpikp.mongodb.net/?retryWrites=true&w=majority")
 
-@client.on_message(
+@app.on_message(
     filters.text
     | filters.sticker
     & ~filters.private

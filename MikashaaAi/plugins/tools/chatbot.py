@@ -1,5 +1,5 @@
 from pyrogram import filters
-from MikashaaAi import app as client
+from MikashaaAi import app 
 from config import OWNER_ID
 from pyrogram.types import Message
 from pyrogram.types import ChatMember
@@ -49,7 +49,7 @@ from pyrogram.types import *
 
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb+srv://kuldiprathod2003:kuldiprathod2003@cluster0.wxqpikp.mongodb.net/?retryWrites=true&w=majority")
 
-@client.on_message(
+@app.on_message(
     filters.text
     | filters.sticker
     & ~filters.private
@@ -113,7 +113,7 @@ async def Daxxai(client: Client, message: Message):
                if not is_chat:
                    chatai.insert_one({"word": message.reply_to_message.text, "text": message.text, "check": "none"})                                                                                                                                               
 
-@client.on_message(
+@app.on_message(
  (
         filters.sticker
         | filters.text
@@ -181,7 +181,7 @@ async def Daxxstickerai(client: Client, message: Message):
               
 
 
-@client.on_message(
+@app.on_message(
     (
         filters.text
         | filters.sticker
@@ -224,7 +224,7 @@ async def Daxxprivate(client: Client, message: Message):
            if not Yo == "sticker":
                await message.reply_text(f"{hey}")
                      
-@client.on_message(
+@app.on_message(
  (
         filters.sticker
         | filters.text

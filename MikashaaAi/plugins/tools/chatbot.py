@@ -1,5 +1,5 @@
 from pyrogram import filters
-from MikashaaAi import app
+from MikashaaAi import app as client
 from config import OWNER_ID
 from pyrogram.types import Message
 from pyrogram.types import ChatMember
@@ -49,7 +49,7 @@ from pyrogram.types import *
 
 MONGO_URL = os.environ.get("MONGO_URL", "mongodb+srv://kuldiprathod2003:kuldiprathod2003@cluster0.wxqpikp.mongodb.net/?retryWrites=true&w=majority")
 
-@app.on_message(
+@client.on_message(
     filters.text
     | filters.sticker
     & ~filters.private

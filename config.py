@@ -8,7 +8,7 @@ load_dotenv()
 
 API_ID = int(getenv("API_ID","28687973"))
 API_HASH = getenv("API_HASH","c377969d25dcee0a496a9c937897591d")
-BOT_TOKEN = getenv("BOT_TOKEN","6452346857:AAEJA_RxifQe-dq5tSs-uglYk7cdAynGfjw")
+BOT_TOKEN = getenv("BOT_TOKEN","6452346857:AAFWxE4vTKNVrlhBEvtWR4VmgvdVDgNYBb0")
 BOT_USERNAME = getenv("BOT_USERNAME","MikaShaaAIBot")
 USERNAME = getenv("USERNAME","MikaShaaAIBot")
 MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://MikashaaAi:LvJ8T7z3IAtYZsCj@mikashaaai.ljsm4zo.mongodb.net/?retryWrites=true&w=majority")

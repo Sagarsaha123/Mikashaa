@@ -5,7 +5,6 @@ from pyrogram.errors import ChatAdminRequired, ChatNotModified, ChatIdInvalid, F
 import os
 import json
 from pyrogram.types import Message
-from config import BOT_USERNAME
 
 @app.on_message(filters.command("link", prefixes="/"))
 async def link_command_handler(client: Client, message: Message):

@@ -6,7 +6,7 @@ from MikashaaAi import app
 from pyrogram.types import ChatPermissions, ChatPrivileges
 from config import OWNER_ID
 from MikashaaAi.misc import SUDOERS
-from MikashaaAi.utils.daxx_ban import admin_filter
+from MikashaaAi.utils.mikasha_ban import admin_filter
 from pyrogram.types import (
     Message,
     CallbackQuery,

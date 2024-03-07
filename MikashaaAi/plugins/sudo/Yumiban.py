@@ -4,14 +4,14 @@ from MikashaaAi import app, userbot
 from MikashaaAi.misc import SUDOERS
 from pyrogram import * 
 from pyrogram.types import *
-from MikashaaAi.utils.daxx_ban import admin_filter
+from MikashaaAi.utils.mikasha_ban import admin_filter
 
 
 
 
 
 
-Yumikoo_text = [
+mika_text = [
 "hey please don't disturb me.",
 "who are you",    
 "aap kon ho",
@@ -52,12 +52,12 @@ channel = ["channel"]
 # ========================================= #
 
 
-@app.on_message(filters.command(["umi","umiko"], prefixes=["y", "Y"]) & admin_filter)
+@app.on_message(filters.command(["mika","mikka"], prefixes=["/","y", "Y"]) & admin_filter)
 async def restriction_app(app :app, message):
     reply = message.reply_to_message
     chat_id = message.chat.id
     if len(message.text) < 2:
-        return await message.reply(random.choice(Yumikoo_text))
+        return await message.reply(random.choice(mika_text))
     bruh = message.text.split(maxsplit=1)[1]
     data = bruh.split(" ")
     

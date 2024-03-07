@@ -6,8 +6,8 @@ from pyrogram import filters
 
 load_dotenv()
 
-API_ID = int(getenv("API_ID","12227067 ")) # Get this value from my.telegram.org/apps
-API_HASH = getenv("API_HASH","b463bedd791aa733ae2297e6520302fe") # Get this value from my.telegram.org/apps
+API_ID = int(getenv("API_ID","28301929")) # Get this value from my.telegram.org/apps
+API_HASH = getenv("API_HASH","f77634e3747f7431584a82c29afba85c") # Get this value from my.telegram.org/apps
 BOT_TOKEN = getenv("BOT_TOKEN","")
 BOT_USERNAME = getenv("BOT_USERNAME","MikaShaaAIBot")
 USERNAME = getenv("USERNAME","MikaShaaAIBot")

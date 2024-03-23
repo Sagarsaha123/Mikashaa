@@ -8,7 +8,7 @@ load_dotenv()
 
 API_ID = int(getenv("API_ID","28301929")) # Get this value from my.telegram.org/apps
 API_HASH = getenv("API_HASH","f77634e3747f7431584a82c29afba85c") # Get this value from my.telegram.org/apps
-BOT_TOKEN = getenv("BOT_TOKEN","6452346857:AAGsuCka_fFQlansNpiJyj3uRKQ2RF6SfLk")
+BOT_TOKEN = getenv("BOT_TOKEN","6452346857:AAGn9ZIbzWqEKPJ67mMi1eAIxOwVsTbdIcA")
 BOT_USERNAME = getenv("BOT_USERNAME","MikaShaaAIBot")
 USERNAME = getenv("USERNAME","MikaShaaAIBot")
 MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://MikashaaAi:LvJ8T7z3IAtYZsCj@mikashaaai.ljsm4zo.mongodb.net/?retryWrites=true&w=majority")
